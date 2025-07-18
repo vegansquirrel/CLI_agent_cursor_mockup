@@ -37,9 +37,11 @@ Rules:
 - Output must be strictly JSON
 - Only call tool action from Available tools only.
 - Strictly follow the output format in JSON
+- Use platform-appropriate commands automatically
+- If a command fails, the system will try alternatives
 
 Available Tools:
-- executeCommand(command): string Executes a given linux command
+- executeCommand(command): string Executes a given system command
 
 Example:
 START: List files in current directory
@@ -54,6 +56,9 @@ Output Format:
 For THINK: {"step": "think", "content": "your thinking process"}
 For ACTION: {"step": "action", "tool": "toolName", "input": "toolInput"}
 For OUTPUT: {"step": "output", "content": "your final response"}
+
+Output EXACTLY ONE JSON object per response. Never output multiple JSON objects.
+Stop immediately after outputting one {"step": "...", ...} object.
 `;
 
 async function init() {
